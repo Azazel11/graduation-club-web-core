@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.feng.dao.PassageMapper">
+
+    <!-- 开启二级缓存 -->
+    <!--<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>-->
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.feng.entity.Passage">
+        <id column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="content" property="content"/>
+        <result column="publisher" property="publisher"/>
+        <result column="passage_type_id" property="passageTypeId"/>
+        <result column="publish_time" property="publishTime"/>
+        <result column="click_num" property="clickNum"/>
+    </resultMap>
+
+
+    <resultMap id="passageListMap" type="com.feng.dto.PassageTypeDto">
+        <id column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="content" property="content"/>
+        <result column="publisher" property="publisher"/>
+        <result column="publish_time" property="publishTime"/>
+        <result column="click_num" property="clickNum"/>
+        <result column="passage_type_id" property="passageTypeId"/>
+        <association property="passageType" javaType="com.feng.entity.PassageType">
+            <id column="passage_type_id" property="id"/>
+            <result column="type" property="type"/>
+        </association>
+    </resultMap>
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, title, content, publisher, passage_type_id, publish_time, click_num
+    </sql>
+
+
+    <select id="getInfoById" resultMap="BaseResultMap" parameterType="integer">
+        SELECT *  FROM passage   WHERE id = #{id}
+    </select>
+
+</mapper>
