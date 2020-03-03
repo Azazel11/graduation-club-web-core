@@ -10,7 +10,6 @@
     </parent>
    <modules>
        <module>service</module>
-       <module>generator</module>
        <module>controller</module>
        <module>core</module>
    </modules>
